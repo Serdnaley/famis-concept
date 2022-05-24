@@ -24,11 +24,11 @@ const labelPosition = ref(0)
 const labelPositionTween = ref(0)
 let updateLabelPositionLoopInterval
 const updateLabelPositionLoop = () => {
-  labelPosition.value = random(0, 100)
-  updateLabelPositionLoopInterval = setTimeout(updateLabelPositionLoop, random(100, 2000))
+  labelPosition.value = random(10, 90)
+  updateLabelPositionLoopInterval = setTimeout(updateLabelPositionLoop, random(1500, 2000))
 }
 
-watch(labelPosition, (value) => gsap.to(labelPositionTween, { value, duration: 1.5, ease }))
+watch(labelPosition, (value) => gsap.to(labelPositionTween, { value, duration: 2, ease }))
 updateLabelPositionLoop()
 onUnmounted(() => clearInterval(updateLabelPositionLoopInterval))
 </script>
@@ -52,7 +52,10 @@ onUnmounted(() => clearInterval(updateLabelPositionLoopInterval))
       </div>
     </div>
 
-    <div class="Compass__label">
+    <div
+      class="Compass__label"
+      :style="`top: ${labelPositionTween}%`"
+    >
       <div class="Compass__label-dot" />
       <img src="@/assets/compass-label.png" alt="" class="Compass__label-img">
     </div>
