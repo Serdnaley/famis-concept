@@ -9,12 +9,13 @@ const parallaxStyles = computed(() => ({
 
 <template>
   <div class="Background">
-    <img
-      src="@/assets/main-picture.png"
-      alt=""
-      class="Background__main-picture"
-      :style="parallaxStyles"
-    >
+    <div :style="parallaxStyles">
+      <img
+        src="@/assets/main-picture.png"
+        alt=""
+        class="Background__main-picture"
+      >
+    </div>
 
     <div class="Background__effects">
       <img
@@ -59,8 +60,6 @@ const parallaxStyles = computed(() => ({
 </template>
 
 <style lang="scss">
-@import '@/styles/style.scss';
-
 .Background {
   position: absolute;
   top: 0;
@@ -77,6 +76,17 @@ const parallaxStyles = computed(() => ({
     left: -5%;
     object-fit: cover;
     z-index: 3;
+    animation: Background__breathing--main-picture 10s ease-in-out infinite;
+
+    @keyframes Background__breathing--main-picture {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
   }
 
   &__effect {
@@ -160,15 +170,15 @@ const parallaxStyles = computed(() => ({
       mix-blend-mode: screen;
       transform: rotate(-60deg);
       z-index: 2;
-      animation: Background__breathing--star-light-vignette 10s ease-in-out infinite;
+      animation: Background__breathing--star-light-vignette 15s ease-in-out infinite;
 
       @keyframes Background__breathing--star-light-vignette {
         0%, 100% {
-          transform: rotate(-60deg) translateX(-10px) scale(1);
+          transform: rotate(-50deg) translateX(-10px) scale(1);
         }
 
         50% {
-          transform: rotate(-60deg) translateX(10px) scale(1.2);
+          transform: rotate(-70deg) translateX(10px) scale(1.2);
         }
       }
     }
