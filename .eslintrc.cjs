@@ -1,26 +1,15 @@
 /* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution")
-
 module.exports = {
-  plugins: [
-    'vue',
-    'import',
-    'unicorn',
-  ],
-  root: true,
-  env: {
-    browser: true,
-    node: true,
-    es6: true,
-    "vue/setup-compiler-macros": true
-  },
+  "root": true,
   "extends": [
-    'eslint:recommended',
-    'plugin:unicorn/recommended',
-    'plugin:eslint-comments/recommended',
-    'plugin:vue/vue3-recommended',
+    "plugin:vue/vue3-essential",
+    "eslint:recommended"
   ],
-  rules: {
+  "env": {
+    "vue/setup-compiler-macros": true,
+  },
+  "rules": {
+    "vue/multi-word-component-names": 0,
     curly: 0,
     semi: [2, 'never'],
     'comma-dangle': [2, 'always-multiline'],
@@ -46,42 +35,5 @@ module.exports = {
     'space-before-function-paren': [2, 'always'],
     'no-unused-vars': 2,
     'lines-between-class-members': 0,
-    'import/order': 0,
-    'import/newline-after-import': [2, { count: 1 }],
-    'unicorn/no-null': 0,
-    'unicorn/no-new-array': 0,
-    'unicorn/prefer-module': 0,
-    'unicorn/no-unsafe-regex': 0,
-    'unicorn/prefer-node-protocol': 0,
-    'unicorn/prevent-abbreviations': 0,
-    'unicorn/no-array-reduce': 0,
-    'unicorn/prefer-prototype-methods': 0,
-    'unicorn/numeric-separators-style': 0,
-    'unicorn/no-array-callback-reference': 0,
-    'eslint-comments/no-unused-disable': 2,
-    'eslint-comments/no-restricted-disable': [2, '*'],
-    '@typescript-eslint/explicit-module-boundary-types': 0,
-    '@typescript-eslint/ban-ts-comment': 0,
-    quotes: [2, 'single'],
-    indent: [2, 2],
-    'unicorn/filename-case': 0,
-    'vue/html-self-closing': [2, {
-      html: {
-        void: 'never',
-        normal: 'always',
-        component: 'always',
-      },
-      svg: 'always',
-      math: 'always',
-    }],
-    'vue/multi-word-component-names': 0,
-    'unicorn/prefer-number-properties': 0,
-    'unicorn/consistent-function-scoping': 0,
-    'unicorn/no-for-loop': 0,
-    'unicorn/better-regex': 0,
-    'vue/first-attribute-linebreak': 0,
-    'vue/no-reserved-props': 0,
-    'unicorn/prefer-export-from': 0,
-    'unicorn/prefer-ternary': 0,
   },
 }

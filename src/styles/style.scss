@@ -1,0 +1,21 @@
+@import "_reset.scss";
+@import "_base.scss";
+@import "_fonts.scss";
+@import "_vars.scss";
+
+@import "./mixins/mixins.scss";
+
+body {
+  @include scrollbar-styles-none;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  font: 400 17px/22px 'SF Pro Display', Helvetica, Arial, sans-serif;
+  background: url("@/assets/background.jpg") var(--main-bg);
+}
+
+img {
+  pointer-events: none;
+  user-select: none;
+  max-width: none;
+}
