@@ -1,7 +1,7 @@
 <script setup>
 import gsap from 'gsap'
-import CustomEase from 'gsap/CustomEase'
-import { random } from 'lodash'
+import { CustomEase } from 'gsap/CustomEase'
+import { random } from 'lodash-es'
 import { onUnmounted, ref, watch } from 'vue'
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
