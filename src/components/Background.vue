@@ -9,15 +9,29 @@ const parallaxStyles = computed(() => ({
 
 <template>
   <div class="Background">
-    <div :style="parallaxStyles">
+    <div class="Background__effects Background__effects--back">
       <img
-        src="@/assets/main-picture.png"
+        src="@/assets/effects/smooth-blue-vignette.png"
         alt=""
-        class="Background__main-picture"
+        class="Background__effect Background__effect--smooth-blue-vignette"
+      >
+
+      <img
+        src="@/assets/effects/star-light-vignette.png"
+        alt=""
+        class="Background__effect Background__effect--star-light-vignette"
       >
     </div>
 
-    <div class="Background__effects">
+    <div :style="parallaxStyles" class="Background__effects Background__effects--main-picture">
+      <img
+        src="@/assets/main-picture.png"
+        alt=""
+        class="Background__effect Background__effect--main-picture"
+      >
+    </div>
+
+    <div class="Background__effects Background__effects--smoke">
       <img
         src="@/assets/effects/smoke.png"
         alt=""
@@ -44,17 +58,6 @@ const parallaxStyles = computed(() => ({
         class="Background__effect Background__effect--smoke Background__effect--smoke-5"
       >
 
-      <img
-        src="@/assets/effects/smooth-blue-vignette.png"
-        alt=""
-        class="Background__effect Background__effect--smooth-blue-vignette"
-      >
-
-      <img
-        src="@/assets/effects/star-light-vignette.png"
-        alt=""
-        class="Background__effect Background__effect--star-light-vignette"
-      >
     </div>
   </div>
 </template>
@@ -66,26 +69,26 @@ const parallaxStyles = computed(() => ({
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
 
-  &__main-picture {
-    position: relative;
-    width: 110%;
-    height: 110%;
-    top: -5%;
-    left: -5%;
-    object-fit: cover;
-    z-index: 3;
-    animation: Background__breathing--main-picture 10s ease-in-out infinite;
+  &__effects {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
 
-    @keyframes Background__breathing--main-picture {
-      0%, 100% {
-        transform: scale(1);
-      }
+    &--back {
+      z-index: 1;
+    }
 
-      50% {
-        transform: scale(1.05);
-      }
+    &--main-picture {
+      z-index: 2;
+    }
+
+    &--smoke {
+      z-index: 3;
+      mix-blend-mode: screen;
     }
   }
 
@@ -98,7 +101,6 @@ const parallaxStyles = computed(() => ({
       height: auto;
       bottom: -30%;
       left: -20%;
-      mix-blend-mode: screen;
       opacity: 0;
       z-index: 4;
       animation: Background__breathing--smoke 3s ease-in-out infinite;
@@ -141,6 +143,25 @@ const parallaxStyles = computed(() => ({
       }
     }
 
+    &--main-picture {
+      width: 110%;
+      height: 110%;
+      top: -5%;
+      left: -5%;
+      object-fit: cover;
+      animation: Background__breathing--main-picture 10s ease-in-out infinite;
+
+      @keyframes Background__breathing--main-picture {
+        0%, 100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.05);
+        }
+      }
+    }
+
     &--smooth-blue-vignette {
       height: 150%;
       width: 150%;
@@ -148,7 +169,6 @@ const parallaxStyles = computed(() => ({
       top: -25%;
       object-fit: cover;
       mix-blend-mode: soft-light;
-      z-index: 1;
       animation: Background__breathing--smooth-blue-vignette 4.5s ease-in-out infinite;
 
       @keyframes Background__breathing--smooth-blue-vignette {
@@ -169,7 +189,6 @@ const parallaxStyles = computed(() => ({
       top: -62vmax;
       mix-blend-mode: screen;
       transform: rotate(-60deg);
-      z-index: 2;
       animation: Background__breathing--star-light-vignette 15s ease-in-out infinite;
 
       @keyframes Background__breathing--star-light-vignette {

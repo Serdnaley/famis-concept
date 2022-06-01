@@ -7,30 +7,25 @@ import { onUnmounted, ref, watch } from 'vue'
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 const ease = CustomEase.create("custom", "M0,0 C0.3,0 0.4,0.3 0.5,0.5 0.6,0.7 0.7,1 1,1")
+const useAnimation = (min, max, durationMin, durationMax) => {
+  const position = ref(0)
+  const positionTween = ref(0)
 
-const pointsPosition = ref(0)
-const pointsPositionTween = ref(0)
-let updatePointsPositionLoopInterval
-const updatePointsPositionLoop = () => {
-  pointsPosition.value = random(-40, 40)
-  updatePointsPositionLoopInterval = setTimeout(updatePointsPositionLoop, random(1500, 2000))
+  let timeout
+  const update = () => {
+    position.value = random(min, max)
+    timeout = setTimeout(update, random(durationMin, durationMax))
+  }
+
+  watch(position, (value) => gsap.to(positionTween, { value, duration: 2, ease }))
+  update()
+  onUnmounted(() => clearTimeout(timeout))
+
+  return positionTween
 }
 
-watch(pointsPosition, (value) => gsap.to(pointsPositionTween, { value, duration: 2, ease }))
-updatePointsPositionLoop()
-onUnmounted(() => clearInterval(updatePointsPositionLoopInterval))
-
-const labelPosition = ref(0)
-const labelPositionTween = ref(0)
-let updateLabelPositionLoopInterval
-const updateLabelPositionLoop = () => {
-  labelPosition.value = random(10, 90)
-  updateLabelPositionLoopInterval = setTimeout(updateLabelPositionLoop, random(1500, 2000))
-}
-
-watch(labelPosition, (value) => gsap.to(labelPositionTween, { value, duration: 2, ease }))
-updateLabelPositionLoop()
-onUnmounted(() => clearInterval(updateLabelPositionLoopInterval))
+const pointsPositionTween = useAnimation(-40, 40, 1500, 2000)
+const labelPositionTween = useAnimation(10, 90, 1500, 2000)
 </script>
 
 <template>
