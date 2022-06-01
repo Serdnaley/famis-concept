@@ -1,31 +1,20 @@
 <script setup>
-import gsap from 'gsap'
-import { CustomEase } from 'gsap/CustomEase'
-import { random } from 'lodash-es'
-import { onUnmounted, ref, watch } from 'vue'
+import { useRandomizerAnimation } from '@/services/useRandomizerAnimation'
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
-const ease = CustomEase.create("custom", "M0,0 C0.3,0 0.4,0.3 0.5,0.5 0.6,0.7 0.7,1 1,1")
-const useAnimation = (min, max, durationMin, durationMax) => {
-  const position = ref(0)
-  const positionTween = ref(0)
-
-  let timeout
-  const update = () => {
-    position.value = random(min, max)
-    timeout = setTimeout(update, random(durationMin, durationMax))
-  }
-
-  watch(position, (value) => gsap.to(positionTween, { value, duration: 2, ease }))
-  update()
-  onUnmounted(() => clearTimeout(timeout))
-
-  return positionTween
-}
-
-const pointsPositionTween = useAnimation(-40, 40, 1500, 2000)
-const labelPositionTween = useAnimation(10, 90, 1500, 2000)
+const pointsPositionTween = useRandomizerAnimation({
+  min: -40,
+  max: 40,
+  durationMin: 1500,
+  durationMax: 2000,
+})
+const labelPositionTween = useRandomizerAnimation({
+  min: 10,
+  max: 90,
+  durationMin: 1500,
+  durationMax: 2000,
+})
 </script>
 
 <template>

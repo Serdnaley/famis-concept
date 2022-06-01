@@ -15,6 +15,7 @@
     "postcss": "^8.4.12",
     "qs": "^6.10.3",
     "sass": "^1.49.11",
+    "swiper": "^8.2.2",
     "vue": "^3.2.31"
   },
   "devDependencies": {
