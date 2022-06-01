@@ -22,7 +22,9 @@ const position = computed(() => {
 
   const position = Math.abs(slideSnapIndex.value - progress * slides.length)
 
-  return 1 - Math.max(0, Math.min(position, 1))
+  if (position > .95) return 0
+  if (position < .5) return 1
+  return 1 - position
 })
 const positionTween = ref(position.value)
 
@@ -63,8 +65,8 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
   &__inner {
     position: absolute;
     height: calc(180px + var(--k) * 120px);
-    width: 100%;
-    left: 0;
+    width: calc(360px + var(--k) * 120px);
+    right: 0;
     bottom: 0;
   }
 
@@ -136,14 +138,15 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
       }
 
       &-4 {
-        opacity: 0;
-        width: calc(100% - 10px);
+        opacity: var(--k);
+        width: calc(100% - 20px);
         height: 100%;
         left: 0;
         top: 0;
         border-radius: 10px 30px 10px 30px;
         transform: skewX(-30deg);
-        background: rgba(white, .5);
+        background: linear-gradient(190deg, #FFFFFF 31.78%, rgba(255, 255, 255, 0) 52.6%);
+        box-shadow: -1px 11px 15px rgba(0, 20, 29, 0.05);
       }
     }
   }

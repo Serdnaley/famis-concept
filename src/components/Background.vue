@@ -67,7 +67,7 @@ const parallaxStyles = computed(() => ({
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: calc(100% - 240px);
   width: 100%;
   z-index: 0;
 
