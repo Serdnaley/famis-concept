@@ -6,30 +6,26 @@ import gunImage from '@/assets/equipments/gun.png'
 import helmetImage from '@/assets/equipments/helmet.png'
 import turbineImage from '@/assets/equipments/turbine.png'
 
-const cards = [
+const content = [
   {
-    id: 0,
     image: gunImage,
     type: 'gun',
     title: 'Super gun',
     model: 'FX-920/13',
     propertyName: 'Power',
   }, {
-    id: 1,
     image: helmetImage,
     type: 'helmet',
     title: 'Met helmet',
     model: 'FX-920/13',
     propertyName: 'Def',
   }, {
-    id: 2,
     image: gloveImage,
     type: 'glove',
     title: 'Steel gloves',
     model: 'FX-920/13',
     propertyName: 'Agility',
   }, {
-    id: 3,
     image: turbineImage,
     type: 'turbine',
     title: 'Bombshell',
@@ -37,6 +33,8 @@ const cards = [
     propertyName: 'Explosion',
   },
 ]
+
+const cards = [...content, ...content].map((card, index) => ({ ...card, id: index }))
 </script>
 
 <template>
@@ -81,6 +79,7 @@ const cards = [
     overflow: visible;
     margin-bottom: 25px;
     margin-left: -20px;
+    margin-right: -200px;
 
     &-item {
       width: fit-content;
