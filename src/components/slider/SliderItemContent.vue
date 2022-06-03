@@ -11,23 +11,23 @@ import SliderItemProgressBar from '@/components/slider/SliderItemProgressBar.vue
 import IconHexagon from '@/components/icons/IconHexagon.vue'
 
 defineProps({
-  index: Number,
+  card: Object,
   position: Number,
 })
 </script>
 
 <template>
-  <div class="SliderItemContent">
+  <div class="SliderItemContent" :class="`SliderItemContent--type-${card.type}`">
     <div class="SliderItemContent__img">
-      <img src="@/assets/equipments/helmet.png" alt="">
+      <img :src="card.image" alt="">
     </div>
 
     <div class="SliderItemContent__info">
       <div class="SliderItemContent__info-title">
-        met helmet
+        {{ card.title }}
       </div>
       <div class="SliderItemContent__info-subtitle">
-        Model: <span>FX-920/13</span>
+        Model: <span>{{ card.model }}</span>
       </div>
     </div>
 
@@ -37,33 +37,31 @@ defineProps({
     </div>
 
     <div class="SliderItemContent__top-labels">
-      <Label style-variant="blue">
+      <Label v-if="['gun', 'helmet'].includes(card.type)" style-variant="blue">
         <IconStar />
         Upgrade
       </Label>
 
-      <Label v-if="false" style-variant="light-blue">
-        <IconAward />
-        Booster
-      </Label>
-
-      <Label v-if="false" style-variant="purple">
-        <IconDollar />
-        Gold
-      </Label>
-
-      <Label v-if="false" style-variant="transparent">
+      <Label v-if="card.type === 'glove'" style-variant="transparent">
         <IconLock />
         Lock
       </Label>
     </div>
 
     <div class="SliderItemContent__progress">
-      <SliderItemProgressBar text="Power" />
+      <SliderItemProgressBar :text="card.propertyName" />
     </div>
 
     <div class="SliderItemContent__bottom-labels">
-      <Label style-variant="gray">
+      <Label v-if="card.type === 'glove'" style-variant="light-blue">
+        <IconAward />
+        Booster
+      </Label>
+      <Label v-else-if="card.type === 'turbine'" style-variant="purple">
+        <IconDollar />
+        Gold
+      </Label>
+      <Label v-else style-variant="gray">
         <IconPlus />
         Add
       </Label>
@@ -75,9 +73,9 @@ defineProps({
     </div>
 
     <div class="SliderItemContent__dots">
-      <IconHexagon :is-filled="index % 3 === 0" />
-      <IconHexagon :is-filled="index % 3 === 1" />
-      <IconHexagon :is-filled="index % 3 === 2" />
+      <IconHexagon :is-filled="card.id % 3 === 0" />
+      <IconHexagon :is-filled="card.id % 3 === 1" />
+      <IconHexagon :is-filled="card.id % 3 === 2" />
     </div>
 
     <div class="SliderItemContent__path">
@@ -96,6 +94,7 @@ defineProps({
 @import "@/styles/mixins/mixins.scss";
 
 .SliderItemContent {
+  $this: &;
   position: absolute;
   height: 100%;
   width: connectToVar(100%, 85%);
@@ -103,12 +102,63 @@ defineProps({
   top: 0;
   user-select: none;
 
+  &--type-gun {
+    #{ $this } {
+      &__img {
+        width: connectToVar(170px, 380px);
+        height: connectToVar(75px, 160px);
+        transform: rotate(connectToVar(-38deg, 0deg));
+        bottom: connectToVar(30px, 100px);
+        left: connectToVar(-3px, 30px);
+      }
+    }
+  }
+
+  &--type-helmet {
+    #{ $this } {
+      &__img {
+        width: connectToVar(70px, 70px * 2.5);
+        height: connectToVar(84px, 84px * 2.5);
+        bottom: connectToVar(17px, 64px);
+        left: connectToVar(35px, 56px);
+      }
+    }
+  }
+
+  &--type-glove {
+    #{ $this } {
+      &__img {
+        width: connectToVar(140px, 280px);
+        height: connectToVar(95px, 190px);
+        bottom: connectToVar(13px, 80px);
+        left: connectToVar(-11px, 3px);
+      }
+
+      &__path {
+        left: connectToVar(45px, 187px);
+        width: connectToVar(85px, 28px);
+
+        &-line {
+          width: connectToVar(81px, 0px);
+        }
+      }
+    }
+  }
+
+  &--type-turbine {
+    #{ $this } {
+      &__img {
+        width: connectToVar(175px, 350px);
+        height: connectToVar(84px, 210px);
+        transform: rotate(connectToVar(0deg, 10deg));
+        bottom: connectToVar(3px, 64px);
+        left: connectToVar(-38px, -10px);
+      }
+    }
+  }
+
   &__img {
     position: absolute;
-    width: connectToVar(70px, 70px * 2.5);
-    height: connectToVar(84px, 84px * 2.5);
-    bottom: connectToVar(17px, 64px);
-    left: connectToVar(35px, 56px);
 
     img {
       height: 100%;
@@ -291,6 +341,9 @@ defineProps({
       }
 
       &:after {
+        z-index: 2;
+        height: 100%;
+        width: 100%;
         background: transparent;
         border: 1px solid #EB6E15;
         animation: SliderItemContent__path-end-animation 2s infinite;

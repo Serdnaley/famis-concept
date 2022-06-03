@@ -7,8 +7,7 @@ import SliderItemBgLine from '@/components/slider/SliderItemBgLine.vue'
 import SliderItemContent from '@/components/slider/SliderItemContent.vue'
 
 defineProps({
-  index: Number,
-  count: Number,
+  card: Object,
 })
 
 const el = ref(null)
@@ -23,8 +22,8 @@ const position = computed(() => {
 
   const position = Math.abs(slideSnapIndex.value - progress * slides.length)
 
-  if (position > .97) return 0
-  if (position < .03) return 1
+  if (position > .95) return 0
+  if (position < .05) return 1
   return 1 - position
 })
 const positionTween = ref(position.value)
@@ -48,7 +47,7 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
         </div>
       </div>
       <div class="SliderItem__content">
-        <SliderItemContent :index="index" :position="+positionTween" />
+        <SliderItemContent :card="card" :position="+positionTween" />
       </div>
     </div>
   </div>
