@@ -3,7 +3,8 @@ import { computed, ref, watch } from 'vue'
 import { useSwiper } from 'swiper/vue'
 import { findIndex } from 'lodash-es'
 import gsap from 'gsap'
-import SliderItemBgPart3Line from '@/components/SliderItemBgPart3Line.vue'
+import SliderItemBgLine from '@/components/slider/SliderItemBgLine.vue'
+import SliderItemContent from '@/components/slider/SliderItemContent.vue'
 
 defineProps({
   index: Number,
@@ -22,8 +23,8 @@ const position = computed(() => {
 
   const position = Math.abs(slideSnapIndex.value - progress * slides.length)
 
-  if (position > .95) return 0
-  if (position < .5) return 1
+  if (position > .97) return 0
+  if (position < .03) return 1
   return 1 - position
 })
 const positionTween = ref(position.value)
@@ -41,15 +42,13 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
       <div class="SliderItem__bg">
         <div class="SliderItem__bg-part SliderItem__bg-part-1" />
         <div class="SliderItem__bg-part SliderItem__bg-part-2" />
-        <div class="SliderItem__bg-part SliderItem__bg-part-3">
-          <SliderItemBgPart3Line v-for="i in 10" :key="i" />
+        <div class="SliderItem__bg-part SliderItem__bg-part-3" />
+        <div class="SliderItem__bg-part SliderItem__bg-part-4">
+          <SliderItemBgLine v-for="i in 10" :key="i" />
         </div>
-        <div class="SliderItem__bg-part SliderItem__bg-part-4" />
       </div>
       <div class="SliderItem__content">
-        {{ index }} <br>
-        {{ slideSnapIndex }} <br>
-        {{ position.toFixed(2) }}
+        <SliderItemContent :index="index" :position="+positionTween" />
       </div>
     </div>
   </div>
@@ -59,13 +58,13 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
 .SliderItem {
   position: relative;
   height: 300px;
-  width: 360px;
+  width: 400px;
   transform: translateX(calc(10% * var(--k)));
 
   &__inner {
     position: absolute;
     height: calc(180px + var(--k) * 120px);
-    width: calc(360px + var(--k) * 120px);
+    width: calc(400px + var(--k) * 120px);
     right: 0;
     bottom: 0;
   }
@@ -143,7 +142,7 @@ watch(position, (value) => gsap.to(positionTween, { value, duration: .3 }))
         height: 100%;
         left: 0;
         top: 0;
-        border-radius: 10px 30px 10px 30px;
+        border-radius: 10px 30px 0 0;
         transform: skewX(-30deg);
         background: linear-gradient(190deg, #FFFFFF 31.78%, rgba(255, 255, 255, 0) 52.6%);
         box-shadow: -1px 11px 15px rgba(0, 20, 29, 0.05);

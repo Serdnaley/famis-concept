@@ -44,7 +44,7 @@ import HeaderMenu from '@/components/HeaderMenu.vue'
     }
 
     &-value {
-      font-family: 'Ethnocentric Rg', sans-serif;
+      font-family: 'Ethnocentric', sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 20px;

@@ -1,6 +1,8 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import SliderItem from '@/components/SliderItem.vue'
+import SliderItem from '@/components/slider/SliderItem.vue'
+
+const slides = [0, 1, 2, 3]
 </script>
 
 <template>
@@ -15,7 +17,7 @@ import SliderItem from '@/components/SliderItem.vue'
       :loop="true"
     >
       <SwiperSlide
-        v-for="(_, index) in 10"
+        v-for="(_, index) in slides"
         :key="index"
         class="Slider__swiper-item"
       >
@@ -44,6 +46,7 @@ import SliderItem from '@/components/SliderItem.vue'
   &__swiper {
     overflow: visible;
     margin-bottom: 25px;
+    margin-left: -20px;
 
     &-item {
       width: fit-content;

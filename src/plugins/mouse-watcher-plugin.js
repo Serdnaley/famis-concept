@@ -22,8 +22,8 @@ const { innerWidth, innerHeight } = typeof window === 'undefined' ? {} : window
 
 const handleMouse = (e) => {
   mouse.position = {
-    x: (e.clientX - mouse.width / 2) / innerWidth * 2,
-    y: (e.clientY - mouse.height / 2) / innerHeight * 2,
+    x: (e.clientX - mouse.width / 2) / innerWidth,
+    y: (e.clientY - mouse.height / 2) / innerHeight,
   }
 }
 

@@ -2,7 +2,7 @@
 import Background from '@/components/Background.vue'
 import Compass from '@/components/Compass.vue'
 import Header from '@/components/Header.vue'
-import Slider from '@/components/Slider.vue'
+import Slider from '@/components/slider/Slider.vue'
 </script>
 
 <template>

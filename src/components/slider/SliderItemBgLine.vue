@@ -22,11 +22,11 @@ const bgPos = useRandomizerAnimation({
 </script>
 
 <template>
-  <div class="SliderItemBgPart3Line" :style="{ left: `${position}%`, width: `${width}px`, backgroundPositionY: `${bgPos}%` }"/>
+  <div class="SliderItemBgLine" :style="{ left: `${position}%`, width: `${width}px`, backgroundPositionY: `${bgPos}%` }"/>
 </template>
 
 <style lang="scss">
-.SliderItemBgPart3Line {
+.SliderItemBgLine {
   position: absolute;
   width: 100%;
   height: 100%;

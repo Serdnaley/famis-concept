@@ -89,7 +89,7 @@
 }
 @mixin ethnocentric-rg-regular {
   @font-face {
-    font-family: 'Ethnocentric Rg';
+    font-family: 'Ethnocentric';
     src: url('@/assets/fonts/ethnocentric/EthnocentricRg-Regular.woff2') format('woff2'),
     url('@/assets/fonts/ethnocentric/EthnocentricRg-Regular.woff') format('woff');
     font-weight: normal;
@@ -99,7 +99,7 @@
 }
 @mixin ethnocentric-rg-italic {
   @font-face {
-    font-family: 'Ethnocentric Rg';
+    font-family: 'Ethnocentric';
     src: url('@/assets/fonts/ethnocentric/EthnocentricRg-Italic.woff2') format('woff2'),
     url('@/assets/fonts/ethnocentric/EthnocentricRg-Italic.woff') format('woff');
     font-weight: normal;

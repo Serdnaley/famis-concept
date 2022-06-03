@@ -31,3 +31,7 @@
     display: none;
   }
 }
+
+@function connectToVar($from , $to, $var: var(--k)) {
+  @return calc(#{$from} + (#{$to} - #{$from}) * #{$var})
+}
