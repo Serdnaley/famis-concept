@@ -16,8 +16,130 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/src/assets/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+
+    <style>
+        .Disclaimer {
+          display: none;
+        }
+
+        @media (max-width: 800px) {
+          html, body {
+            margin: 0;
+            overflow: hidden;
+          }
+
+          #app {
+            opacity: 0;
+            pointer-events: none;
+          }
+
+          .Disclaimer {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            color: black;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            font-size: 64px;
+            line-height: 1.2;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            z-index: 9999999;
+          }
+        }
+
+        .Loading {
+          position: fixed;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: white;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: 9999998;
+        }
+
+        .Loading__logo {
+          margin-bottom: 100px;
+        }
+
+        .Loading__logo path {
+          fill: transparent;
+          stroke: #141E22;
+          stroke-width: 1px;
+          stroke-dasharray: 300 300;
+          animation: Loading__logo 5s cubic-bezier(0.3, 0.3, 0.7, 0.2) infinite;
+        }
+
+        @keyframes Loading__logo {
+          0% {
+            stroke-dashoffset: -180;
+          }
+          100% {
+            stroke-dashoffset: 300;
+          }
+
+          0%, 30%, 100% {
+            fill: transparent;
+          }
+
+          75%, 90% {
+            fill: #141E22;
+          }
+        }
+
+        .Loading__text {
+          position: absolute;
+          bottom: 150px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 16px;
+          line-height: 1.2;
+          font-weight: normal;
+          font-family: 'Roboto', sans-serif;
+          text-align: center;
+          color: black;
+          animation: Loading__text 3s ease infinite;
+        }
+
+        @keyframes Loading__text {
+          0%, 100% {
+            opacity: .1;
+          }
+          50% {
+            opacity: .3;
+          }
+        }
+    </style>
 </head>
 <body>
+<div class="Disclaimer">
+    <div class="Disclaimer__text">
+        Please open it on your laptop ;)
+    </div>
+</div>
+
+<div id="AppLoading" class="Loading">
+    <svg class="Loading__logo" width="137" height="41" viewBox="0 0 137 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24.4674 18.2801L19.9676 24.1001H6.9996V26.4655H23.3737L18.8739 32.2544H6.9996V40.7199H0V18.2801H24.4674Z" fill="#141E22"/>
+        <path d="M26.3095 40.7199L30.528 34.8999H39.9338L34.0903 26.839L23.9347 40.7199H15.2789L29.7156 20.77C30.1739 20.106 30.8093 19.525 31.6217 19.0271C32.5175 18.4876 33.382 18.2179 34.2153 18.2179C35.0695 18.2179 35.934 18.4876 36.8089 19.0271C37.5797 19.5043 38.2047 20.0852 38.6838 20.77L52.7768 40.7199H26.3095Z" fill="#141E22"/>
+        <path d="M94.6272 40.7821H86.9714L84.0028 28.9242L77.6906 39.0392C76.8574 40.3464 75.7116 41 74.2533 41C73.5034 41 72.7742 40.8133 72.066 40.4398C71.3577 40.0663 70.8264 39.5995 70.4723 39.0392L64.1289 28.9242L61.1916 40.7821H53.5045L59.3479 20.8633C59.5771 20.0541 60.0562 19.3798 60.7853 18.8403C61.5353 18.2801 62.3894 18 63.3477 18C64.8268 18 66.108 18.8714 67.1912 20.6143L74.0658 31.7875L80.9717 20.6143C82.0341 18.8714 83.3049 18 84.784 18C85.7631 18 86.6172 18.2801 87.3463 18.8403C88.0755 19.3798 88.565 20.0541 88.815 20.8633L94.6272 40.7821Z" fill="#141E22"/>
+        <path d="M104.538 40.7199H97.5696V18.2801H104.538V40.7199Z" fill="#141E22"/>
+        <path d="M136.281 18.2801L131.782 24.1001H115.845C114.991 24.1001 114.564 24.401 114.564 25.0027C114.564 25.6044 114.991 25.9053 115.845 25.9053H127.313C130.042 25.9053 132.323 26.5692 134.156 27.8972C136.052 29.3081 137 31.134 137 33.3748C137 35.5949 136.042 37.3897 134.125 38.7591C132.334 40.0663 130.063 40.7199 127.313 40.7199H106.689L111.189 34.931H127.313C128.042 34.931 128.698 34.8065 129.282 34.5575C130.032 34.2463 130.407 33.8209 130.407 33.2815C130.407 32.7212 130.032 32.2959 129.282 32.0054C128.719 31.7979 128.063 31.6942 127.313 31.6942H115.845C113.303 31.6942 111.179 31.1132 109.47 29.9513C107.637 28.7064 106.72 27.0568 106.72 25.0027C106.72 22.9278 107.637 21.2679 109.47 20.023C111.179 18.8611 113.303 18.2801 115.845 18.2801H136.281Z" fill="#141E22"/>
+    </svg>
+
+    <div class="Loading__text">
+        Loading (<span id="AppLoading__percent">0</span>%)...
+    </div>
+</div>
 <div id="app"></div>
 <script type="module" src="/src/main.js"></script>
 </body>
