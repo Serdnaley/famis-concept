@@ -65,6 +65,15 @@
           top: 0;
           left: 0;
           z-index: 9999998;
+          opacity: 1;
+          transform: scale(1);
+          transition: 1s;
+        }
+
+        .Loading--hidden {
+          opacity: 0;
+          transform: scale(1.5);
+          pointer-events: none;
         }
 
         .Loading__logo {

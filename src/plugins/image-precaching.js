@@ -7,7 +7,10 @@ const onProgress = (progress) => {
   document.querySelector('#AppLoading__percent').innerText = Math.round(progress * 100)
 }
 const onComplete = () => {
-  document.querySelector('#AppLoading').remove()
+  document.querySelector('#AppLoading').classList.add('Loading--hidden')
+  setTimeout(() => {
+    document.querySelector('#AppLoading').remove()
+  }, 1000)
 }
 
 export const imagePrecachingPlugin = () => {
